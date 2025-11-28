@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Manajemen Sekolah Modern</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <nav id="sidebar">
+        <div class="brand">
+            <i class="fa-solid fa-school"></i>
+            <span>SIAKAD NURUL HUDA</span>
+        </div>
+        <div id="menu-container">
+            </div>
+    </nav>
+
+    <main id="main-content">
+        <header>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <button class="btn-toggle-sidebar" id="toggleSidebarBtn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="page-title">
+                    <h1 id="page-header">Dashboard</h1>
+                    <p id="current-date"></p>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary" onclick="alert('Fitur Sync Server belum aktif.')">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Sync Data
+                </button>
+            </div>
+        </header>
+
+        <div id="content-body"></div>
+    </main>
+
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
