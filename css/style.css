@@ -1,0 +1,233 @@
+/* --- 1. CSS VARIABLES & RESET --- */
+:root {
+    --primary: #6c5ce7;
+    --primary-dark: #5b4cc4;
+    --secondary: #a29bfe;
+    --bg-body: #f1f2f6;
+    --surface: #ffffff;
+    --text: #2d3436;
+    --text-light: #636e72;
+    --radius: 16px;
+    --shadow: 0 10px 20px rgba(0,0,0,0.05);
+    --sidebar-width: 260px;
+    --transition: 0.3s ease;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+body { background-color: var(--bg-body); color: var(--text); display: flex; min-height: 100vh; overflow-x: hidden; }
+
+/* --- 2. LAYOUT & SIDEBAR --- */
+#sidebar {
+    width: var(--sidebar-width);
+    background: var(--surface);
+    height: 100vh;
+    position: fixed;
+    left: 0; top: 0;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    z-index: 100;
+    transition: var(--transition);
+    overflow-y: auto;
+}
+
+.brand {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 12px;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: var(--transition);
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.nav-item:hover, .nav-item.active {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.nav-item i { width: 25px; }
+
+/* --- 3. MAIN CONTENT --- */
+#main-content {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    padding: 30px;
+    transition: var(--transition);
+    width: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-title h1 { font-size: 1.5rem; color: var(--text); }
+.page-title p { color: var(--text-light); font-size: 0.9rem; }
+
+.btn-toggle-sidebar {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+/* --- 4. COMPONENTS --- */
+.card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 25px;
+    box-shadow: var(--shadow);
+    margin-bottom: 25px;
+    animation: fadeIn 0.5s ease;
+}
+
+.form-group { margin-bottom: 15px; }
+label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dfe6e9;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+input:focus, select:focus, textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+.btn-success { background: #00b894; color: white; }
+.btn-danger { background: #d63031; color: white; }
+
+/* Tables */
+.table-container { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #dfe6e9; }
+th { background-color: #f8f9fa; color: var(--text); font-weight: 700; }
+tr:hover { background-color: #f1f2f6; }
+
+/* Attendance Radio Custom */
+.attendance-options { display: flex; gap: 10px; }
+.radio-label {
+    display: flex; flex-direction: column; align-items: center; cursor: pointer; font-size: 0.8rem;
+}
+.radio-label input { margin-bottom: 2px; width: auto; }
+
+/* Tabs inside pages */
+.tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.tab-btn {
+    background: transparent; border: 1px solid var(--primary); color: var(--primary);
+    padding: 8px 16px; border-radius: 20px; cursor: pointer; transition: var(--transition);
+}
+.tab-btn.active, .tab-btn:hover { background: var(--primary); color: white; }
+
+/* File Input with Time */
+.file-proof-wrapper { display: flex; flex-direction: column; gap: 5px; }
+.timestamp-badge { font-size: 0.75rem; color: var(--primary); font-weight: bold; }
+
+/* --- 5. RESPONSIVE --- */
+@media (max-width: 768px) {
+    :root { --sidebar-width: 0px; }
+    #sidebar { transform: translateX(-260px); width: 260px; }
+    #sidebar.open { transform: translateX(0); }
+    #main-content { margin-left: 0; }
+    .btn-toggle-sidebar { display: block; }
+    
+    .overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.5); z-index: 99; display: none;
+    }
+    .overlay.active { display: block; }
+}
+/* --- UPDATE UNTUK TABEL ABSENSI GURU --- */
+td {
+    vertical-align: top; /* Agar konten ada di atas cell, bukan di tengah */
+}
+
+/* Mempercantik input file agar muat di kolom */
+input[type="file"] {
+    font-size: 0.8rem;
+    padding: 8px;
+    background: #fff;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- Tambahan Styling untuk Sub-Menu (Accordion) --- */
+
+.nav-item.parent-item {
+    cursor: pointer;
+    background-color: #eaf0f6; /* Warna latar belakang untuk menu utama */
+    color: var(--text);
+    font-weight: 600;
+}
+
+.nav-item.parent-item.active-group {
+    background-color: var(--primary);
+    color: white;
+}
+
+.nav-item.parent-item.active-group i {
+    color: white;
+}
+
+.nav-item.sub-item {
+    padding: 10px 15px; /* Kurangi padding agar terlihat sebagai sub-menu */
+    font-size: 0.85rem;
+    border-radius: 0; /* Hilangkan radius di sub-menu */
+    border-left: 3px solid transparent;
+}
+
+.nav-item.sub-item.active {
+    background-color: #e5e5f7; /* Latar belakang berbeda untuk sub-item aktif */
+    color: var(--primary-dark);
+    border-left: 3px solid var(--primary);
+    font-weight: 600;
+}
+
+/* Hindari hover aneh pada sub-item */
+.nav-item.sub-item:hover {
+    background-color: #f1f2f6;
+    color: var(--text);
+}
+
+.nav-item.sub-item.active:hover {
+    background-color: #e5e5f7; 
+}
+
+/* Mengatur posisi chevron */
+.nav-item.parent-item i:last-child {
+    transition: transform 0.3s ease;
+}
